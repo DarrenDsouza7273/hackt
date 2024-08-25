@@ -1,13 +1,30 @@
+@media (max-width: 1200px) {
+  .cards-container {
+    grid-template-columns: repeat(auto-fit, minmax(calc(33.33% - 20px), 1fr));
+  }
+}
+
+@media (max-width: 900px) {
+  .cards-container {
+    grid-template-columns: repeat(auto-fit, minmax(calc(50% - 20px), 1fr));
+  }
+}
+:root {
+  --primary-color: #3498db;
+  --secondary-color: #2c3e50;
+  --background-color: #f8f9fa;
+  --card-background: #ffffff;
+}
 .App {
   display: flex;
   height: 100vh;
-  background-color: #f4f4f4; 
+  background-color: var(--background-color); 
 }
 
 .sidebar {
   width: 240px;
-  background-color: #f0f0f0; 
-  color: #333; 
+  background-color: var(--secondary-color);
+  color: #ffffff;
   padding: 20px;
   max-height: 95vh;
   display: flex;
@@ -87,10 +104,10 @@
   margin-left: 270px;
   flex: 1;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  overflow: auto;
+  justify-content: flex-start; /* Change from center to flex-start */
+  align-items: flex-start; /* Change from center to flex-start */
+  padding: 0; /* Remove padding */
+  overflow: hidden; /* Hide overflow */
 }
 
 .chart-container {
@@ -112,7 +129,13 @@
   align-items: center;
   justify-content: center;
 }
-
+.cards-container {
+  margin-top: 60px; /* Space below the button */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(calc(25% - 20px), 1fr));
+  gap: 20px;
+  padding: 20px;
+}
 .card:hover {
   transform: translateY(-10px);
   box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.2);
@@ -123,11 +146,130 @@
   height: 100%;
 }
 
+/* ... (keep all previous CSS unchanged) ... */
+
 .rooms-page {
   padding: 20px;
   position: relative;
+  min-height: 100vh;
+  overflow-y: auto;
 }
 
+.add-card-button {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 1000;
+  transition: background-color 0.3s, transform 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.add-card-button:hover {
+  background-color: #2980b9;
+  transform: scale(1.1);
+}
+
+.cards-container {
+  margin-top: 80px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 0 20px;
+}
+
+.room-card {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.room-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.room-card-settings {
+  margin-top: 15px;
+}
+
+.room-card-settings label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.room-card-settings input[type="checkbox"] {
+  order: 2;
+  margin-left: 8px;
+}
+
+.room-card p {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333;
+  text-align: left;
+}
+.room-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.room-card input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.room-card input:focus {
+  outline: none;
+  border-color: #777;
+  box-shadow: 0 0 5px rgba(119, 119, 119, 0.5);
+}
+
+.room-card-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.room-card button {
+  padding: 8px 12px;
+  background-color: #777;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.room-card button:hover {
+  background-color: #555;
+}
+.room-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+}
 .add-card-button {
   position: absolute;
   top: 20px;
@@ -147,15 +289,17 @@
 }
 
 .cards-container {
-  margin-top: 60px; /* Space below the button */
+   margin-top: 60px; /* Space below the button */
   display: flex;
   flex-wrap: wrap;
-  gap: 15px;
+  gap: 20px;
+  overflow: visible; /* Add this line to prevent inner scrolling */
 }
 .rooms-page {
   padding: 20px;
   position: relative;
-  min-height: 100vh; /* Ensure the page covers the full height */
+  height: calc(100vh - 40px); /* Subtract padding from viewport height */
+  overflow-y: auto; /* Add vertical scrolling only when needed */
 }
 
 .add-card-button {
@@ -194,4 +338,52 @@
   min-width: 250px;
   max-width: 350px;
   font-size: 18px; /* Larger text inside cards */
+}
+.card-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.card-actions button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.settings-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.settings-items {
+  margin-top: 10px;
+}
+
+.settings-items label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.settings-items input[type="checkbox"] {
+  margin-right: 5px;
+}
+
+.room-card-settings {
+  margin-top: 15px;
+}
+
+.room-card-settings label {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.room-card-settings input[type="checkbox"] {
+  margin-right: 8px;
 }

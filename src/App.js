@@ -6,7 +6,7 @@ import LineChart from "./components/LineChart";
 import PieChart from "./components/PieChart";
 import MixedChart from "./components/MixedChart";
 import { UserData } from "./Data";
-
+import RoomsPage from "./components/RoomPage";
 function App() {
   const [userData] = useState({
     labels: UserData.map((data) => data.year),
@@ -120,7 +120,7 @@ function App() {
         <div className="main-content">
           <Routes>
             <Route path="/" element={<Dashboard userData={userData} pieData={pieData} chartOptions={chartOptions} />} />
-            <Route path="/rooms" element={<Rooms />} />
+            <Route path="/rooms" element={<RoomsPage />} />
             <Route path="/another-page" element={<AnotherPage />} />
           </Routes>
         </div>
@@ -168,6 +168,7 @@ function Rooms() {
     </div>
   );
 }
+
 
 function AnotherPage() {
   return <div>Another Page Content</div>;
