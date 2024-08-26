@@ -120,7 +120,7 @@ function App() {
         <div className="main-content">
           <Routes>
             <Route path="/" element={<Dashboard userData={userData} pieData={pieData} chartOptions={chartOptions} />} />
-            <Route path="/rooms" element={<RoomsPage />} />
+           <Route path="/rooms" element={<RoomsPage />} />
             <Route path="/another-page" element={<AnotherPage />} />
           </Routes>
         </div>
